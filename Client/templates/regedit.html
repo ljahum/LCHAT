@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Contact - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+</head>
+
+<body>
+<main class="page contact-page">
+    <section class="portfolio-block contact">
+        <div class="container">
+            <div class="heading">
+                <h2>请注册</h2>
+            </div>
+            <form class="mt-sm-0 pt-sm-5 ps-sm-5 pe-sm-5 ps-5" style="height: 379px;width: 341px;">
+                <div class="mb-3">
+                    <label class="form-label" for="name">Your userID</label>
+                    <input class="form-control item" type="text" id="userID">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Your password</label>
+                    <input class="form-control item" type="text" id="password">
+                </div>
+                <div>
+                    <button type="submit" id = "btn_add">注册</button>
+                </div>
+                <a class="forgot" href="/login">已有账户 </a>
+
+<!--                <a class="forgot" href="/regedit">no account? sign up </a>-->
+
+
+            </form>
+        </div>
+    </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script src="assets/js/script.min.js"></script>
+<script>
+    var btn_add = document.getElementById("btn_add");
+    btn_add.onclick = function (e) {
+        var userID = document.getElementById("userID").value;
+        var password = document.getElementById("password").value;
+        var data= { "userID": userID, "password": password }
+        console.log(data)
+        $.ajax({
+            url: "/regedit",
+            type: "POST",
+            data: { "userID": userID, "password": password },
+
+            success: function (event) {
+                console.log(event);    
+                if(event.regeditCheck == true){
+                    alert("注册成功");
+                    window.location.href='/home';
+                }else{
+                    alert("注册失败");
+                    // window.location.href = "/login";
+                }
+            
+            },
+            fail: function (event) {
+                console.log(event);
+            }
+        })
+
+    }
+</script>
+</body>
+
+</html>
