@@ -32,10 +32,22 @@ type Feedback struct {
 	MsgList string `json:"msgList"`
 }
 
+// 留言的结构体
 type Comment struct {
 	Id      int64
 	Name    string
 	Content string
 	Mail    string
 	Time    string
+	To      string
+}
+
+// p2p 邮件的结构体
+type Mail struct {
+	Id      int64
+	Name    string
+	Content string
+	Mail    string
+	Time    string
+	To      string
 }

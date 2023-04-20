@@ -1,0 +1,145 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	padding-top: 80px;
+}
+
+header {
+
+	top: 0;
+	background-color: #007aff;
+	width: 100%;
+	color: #fff;
+	padding: 20px;
+	position: fixed;	
+	z-index: 9999;
+}
+
+h1 {
+	margin: 0;
+}
+
+main {
+	margin: 20px;
+}
+
+.message {
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+	padding: 20px;
+}
+
+.message-title {
+	margin: 0;
+}
+
+.message-content {
+	margin-top: 10px;
+}
+
+.message-author {
+	color: #666;
+	margin-right: 10px;
+}
+
+.message-time {
+	color: #999;
+	font-size: 12px;
+}
+
+
+
+form {
+	display: flex;
+	flex-direction: row;
+}
+
+input[type="text"] {
+	border: none;
+	border-radius: 999px;
+	flex-grow: 1;
+	margin-right: 10px;
+	outline: none;
+	padding: 10px;
+}
+
+button[type="submit"] {
+	background-color: #007aff;
+	border: none;
+	border-radius: 999px;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #4CAF50; /*按钮背景颜色*/
+	color: white; /*文字颜色*/
+	text-decoration: none;
+	border-radius: 5px;
+	font-size: 16px;
+	
+	transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+	background-color: #3e8e41; /*鼠标悬停时的背景颜色*/
+	color: #b9dbff; /*文字颜色*/
+	text-decoration: none;
+}
+h2 {
+	font-family: Arial, sans-serif;
+	font-size: 32px;
+}
+
+
+.button2 {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin-bottom: 10px;
+	padding: 10px 20px;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+footer {
+	background-color: #f5f5f5;
+	bottom: 0;
+	box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	position: fixed;
+	width: 98%;
+}
+
+#input-box {
+	display: none;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px;
+	background-color: #f2f2f2;
+	border-top: 1px solid #ccc;
+	box-sizing: border-box;
+	animation: slide-up 0.5s ease-in-out;
+}
+
+/* 定义弹出动画 */
+@keyframes slide-up {
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+

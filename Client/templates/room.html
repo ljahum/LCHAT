@@ -21,25 +21,35 @@
 			bottom: 0;
 		}
 	</style>
+	<form id="my-new-form" style="float: right;">
+		<input id="touser" name="touser" id="input-touser" placeholder="输入收件人">
+		<a class="button" onclick="creatNewMail()"  >新建留言</a>
+	</form>
+	
+	
 </header>
 
 <main>
-	 {{range $index, $ele := .stuArr }}
-	 {{if eq $ele.To "admin"}}
-	<section id="message-list">
-		<article class="message">
-			<h2 class="message-title">{{ $ele.Name }}</h2>
-			
-			<span style="color:gray;"><small>{{ $ele.Time }}</small></span>
-			<p class="message-content">{{ $ele.Content }}</p>
-			
+	{{$username := .username}}
+	{{range $index, $ele := .stuArr }}
+	 	{{if eq $ele.To  $username}}
+			<section id="message-list">
+				<article class="message">
+					<h2 class="message-title">{{ $ele.Name }}</h2>
+					
+					<span style="color:gray;"><small>{{ $ele.Time }}</small></span>
+					<p class="message-content">{{ $ele.Content }}</p>
 
-			
+					<div style="position: absolute;  right: 10%;">
+						<button class="button2" onclick="showInputBox()">Click Me</button>
+					</div>
 
-		</article>
-		<!-- 多个留言文章 -->
-	</section>
-	{{ end }}
+					
+
+				</article>
+				<!-- 多个留言文章 -->
+			</section>
+	 	{{ end }}
 	 {{ end }}
 	 <section id="message-list" class="bottom-section">
 		<article class="message">
@@ -51,15 +61,40 @@
 
 </main>
 
-<footer>
+<footer id="input-box">
 	<form id="my-form">
 		<input id="message" name="message" type="text" id="input-field" placeholder="请输入留言内容...">
 		<button type="submit" onclick="submitForm()">发表留言</button>
 	</form>
 </footer>
-
-
 <script>
+	var touser
+
+	//这两个函数用来显示输入框 并获取收件人
+	function showInputBox() {
+		// 显示输入框
+		document.getElementById("input-box").style.display = "block";
+		// 获取 article 元素
+		var button = document.querySelector('button');
+		var article = button.closest('article');
+
+		// 获取 article 元素下的 h2 元素
+		var h2 = article.querySelector('h2');
+
+		// 获取 h2 的文本内容
+		touser = h2.textContent;
+	}
+
+	function creatNewMail() {
+		// 显示输入框
+		document.getElementById("input-box").style.display = "block";
+		// 获取 article 元素
+		//var button = document.querySelector('button');
+		var form = document.getElementById("my-new-form");
+		var formData = new FormData(form);
+		touser = formData.get("touser")
+		
+	}
 	function submitForm() {
 		
 		// 获取表单对象
@@ -67,7 +102,7 @@
 		
 		// 创建FormData对象，将input标签中的值打包成表单数据
 		var formData = new FormData(form);
-		formData.append('touser', 'admin')
+		formData.append('touser', touser)
 		// 发送POST请求，将打包后的表单数据发送给后端
 		fetch("/square", {
 			method: 'POST',
@@ -75,8 +110,7 @@
 		}).then(response => response.text())
 		.then(data => alert(data))
 		.catch(error => console.error(error))
-		alert("您输入了：" + formData.get("message"));
-		
+		alert("您输入了：" + formData.get("message"));	
 	}
 </script>
 </body>

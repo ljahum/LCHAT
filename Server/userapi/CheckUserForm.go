@@ -66,11 +66,12 @@ func CheckInsertMsg(publicKey *rsa.PublicKey, chatmsg common.ChatMsg) common.Fee
 		fmt.Println("认证成功")
 	}
 	var feedback common.Feedback
-	var msg common.Comment
+	var msg common.Mail
 	_ = json.Unmarshal(data, &msg)
 	db := common.DB
-	sqlStr := "INSERT INTO liuyan(name,content,time,mail )VALUES(?,?,?,?)"
-	_, err := db.Exec(sqlStr, msg.Name, msg.Content, msg.Time, msg.Mail)
+	//INSERT INTO mail_table(name,content,time,mail,`to`) VALUES('admin', '123', '2013', '123@qq.com', 'admin');
+	sqlStr := "INSERT INTO mail_table(name,content,time,mail,`to`)VALUES(?,?,?,?,?)"
+	_, err := db.Exec(sqlStr, msg.Name, msg.Content, msg.Time, msg.Mail, msg.To)
 	if err != nil {
 		fmt.Printf("insert failed, err:%v\n", err)
 		feedback.Flag = false

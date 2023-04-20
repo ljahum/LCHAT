@@ -6,7 +6,6 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 	"errors"
-	"fmt"
 )
 
 type Box struct {
@@ -27,18 +26,8 @@ type StatusFlow struct {
 }
 
 func main() {
-	//key := []byte("aa00000000000001")
-	key := []byte("!@#$%^&*()_)(*&^")
-
-	data := []byte("{\"Status\":3,\"Payload\":\"eyJNc2ciOiJleUpKWkNJNk1Dd2lUbUZ0WlNJNkltZDFaWE4wSWl3aVEyOXVkR1Z1ZENJNkltZG9hbXNpTENKTllXbHNJam9pYm1sc0lpd2lWR2x0WlNJNklqSXdNak10TURNdE1Ea2dNVGs2TkRrNk1qY2lmUT09IiwiU2lnbmF0dXJlIjoianlJazJHVHpwWmMzT1Nja3lTK0Y3R2J5ZUxUYnRJVmphekhjYURnSldNZnRoR2VHUWdPdnJpaHJGY1d1YTYrTGJBOTF1VWtVZjRjV0F1ODB5dTk2TzdRNW9LYkljbjRDeDVHVkZiWWNrMnduTStGOUhuY0FSTlIrUGJ2aGxwL0k4L2RFOEtOM3pWSWVxMUl3U0NQMWh2YldXQm9tNGZxa0lrRWRpb1VMRldvPSJ9\"}")
-
-	str := EncryptecbMode_withPadding(data, key)
-	//解密
-	str1 := DecryptecbMode_withUnpadding(str, key)
-	//打印
-	fmt.Printf(" 加密：%v\n 解密：%s\n ",
-		string(str), str1,
-	)
+	sqlStr := "SELECT * FROM mail_table WHERE `to` = '" + "user1" + "' ORDER BY id DESC LIMIT 20;"
+	println(sqlStr)
 
 }
 

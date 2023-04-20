@@ -43,6 +43,7 @@ func (router *UerLoginRouter) checkLogin(context *gin.Context) { //post
 	fmt.Println("feedBack.Flag", feedBack.Flag)
 	fmt.Println("feedBack.MsgList", feedBack.MsgList) //以后存到全局消息列表
 	if feedBack.Flag == true {
+		wsHandler.UserName = data.UserID
 		PackedLiuyanData, _ := base64.StdEncoding.DecodeString(feedBack.MsgList)
 		_ = json.Unmarshal(PackedLiuyanData, &common.LiuyanData)
 		for k, v := range common.LiuyanData {

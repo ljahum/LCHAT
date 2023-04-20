@@ -19,11 +19,12 @@ import (
 var PubKey *rsa.PublicKey
 var PriKey *rsa.PrivateKey
 
-var Sessionkey []byte
+var (
+	Sessionkey []byte
+	UserName   string = "ljahum"
+)
 
-const UserName = "user1"
-
-type msg_to_server struct {
+type msgToServer struct {
 	ID      string `json:"ID"`
 	Payload string `json:"Payload"`
 	Sign    string `json:"Sign"`
@@ -100,7 +101,7 @@ func initkey(conn *websocket.Conn) bool {
 	//反正b64一下
 	b64encbytes := base64.StdEncoding.EncodeToString(encBytes)
 	b64signature := base64.StdEncoding.EncodeToString(S)
-	data := msg_to_server{UserName, b64encbytes, b64signature}
+	data := msgToServer{UserName, b64encbytes, b64signature}
 
 	json_data, _ := json.Marshal(data)
 	conn.WriteMessage(websocket.TextMessage, json_data)

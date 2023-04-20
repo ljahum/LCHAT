@@ -83,13 +83,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 		}
 		if StatuedPlain.Status == common.StatusChat {
-			//不想做捏
+			//pass
 		}
 		var TestData []byte
 		fmt.Println("feedback.Flag", feedback.Flag)
 		if feedback.Flag == true {
 			//TestData = []byte("testString")
-			TestData = common.GetComment()
+			TestData, _ = common.GetComment(SessionID)
 		} else {
 			//bytes
 			TestData = []byte("nil")

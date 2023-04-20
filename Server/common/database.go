@@ -44,29 +44,25 @@ func InitDB() *sql.DB {
 //	func GetDB() *sql.DB {
 //		return DB
 //	}
-func GetComment() []byte {
-	sqlStr := "select * from liuyan ORDER BY id DESC LIMIT 20"
+func GetComment(SessionID string) ([]byte, []byte) {
+	//获取广播的消息
+	sqlStr := "select * from mail_table ORDER BY id DESC LIMIT 30"
+	//sqlStr = "SELECT * FROM mail_table WHERE `to` = '" + SessionID + "' ORDER BY id DESC LIMIT 20;"
 	rows, err := DB.Query(sqlStr)
 	if err != nil {
 		panic("fail to connect databse,err:")
 	}
 	defer rows.Close()
-	var liuyanData []*Comment
+	var liuyanData []*Mail
 	for rows.Next() {
-		var com Comment
-		err := rows.Scan(&com.Id, &com.Name, &com.Content, &com.Mail, &com.Time)
+		var com Mail
+		err := rows.Scan(&com.Id, &com.Name, &com.Content, &com.Mail, &com.Time, &com.To)
 		if err != nil {
 			fmt.Printf("scan failed, err:%v\n", err)
 		}
 		liuyanData = append(liuyanData, &com)
 	}
 	PackedLiuyanData, _ := json.Marshal(liuyanData)
-	//b64PackedLiuyan := base64.StdEncoding.EncodeToString(PackedLiuyanData)
-	//fmt.Println(b64PackedLiuyan)
-	return PackedLiuyanData
-	//PackedLiuyanData, _ = base64.StdEncoding.DecodeString(b64PackedLiuyan)
-	//_ = json.Unmarshal(PackedLiuyanData, &liuyanData)
-	//fmt.Println(liuyanData)
-	//for key, value := range liuyanData {
-	//	fmt.Println(key, value)
+	return PackedLiuyanData, nil
+
 }
